@@ -2,8 +2,8 @@
 include("wpf_define.php");
 include_once('bbcode.php');
 
-if(!class_exists('mingleforum')){
-class mingleforum {
+if(!class_exists('mingleforum')) {
+class mingleforum{
 
 	var $db_version = 2; //MANAGES DB VERSION
 
@@ -21,6 +21,7 @@ class mingleforum {
 		add_action("wp_head", array(&$this, "setup_header"));
 		add_action("plugins_loaded", array(&$this, "wpf_load_widget"));
 		add_action("wp_footer", array(&$this, "wpf_footer"));
+		add_filter('wpseo_whitelist_permalink_vars', array($this, 'yoast_seo_whitelist_vars'));
 		if($this->options['wp_posts_to_forum'])
 		{
 			add_action("add_meta_boxes", array(&$this, "send_wp_posts_to_forum"));
@@ -261,6 +262,12 @@ class mingleforum {
 		echo "</select>";
 			echo "</label></p>
 				<input type='hidden' id='wpf_submit' name='wpf_submit' value='1' />";
+	}
+
+	//Fix SEO by Yoast conflict
+	public function yoast_seo_whitelist_vars($vars) {
+		$my_vars = array('vforum', 'g', 'viewforum', 'f', 'viewtopic', 't', 'mingleforumaction', 'topic', 'user_id', 'quote', 'thread', 'id', 'action', 'forum', 'markallread', 'getNewForumID', 'delete_topic', 'remove_post', 'forumsubs', 'threadsubs', 'sticky', 'closed', 'move_topic');
+		return array_merge($vars, $my_vars);
 	}
 
 	function wpf_footer(){
@@ -696,9 +703,9 @@ class mingleforum {
 	function showforum($forum_id){
 		global $user_ID;
 		if(isset($_GET['delete_topic']))
-			$this->remove_topic();
+			$this->remove_topic($forum_id);
 		if(isset($_GET['move_topic']))
-			$this->move_topic();
+			$this->move_topic($forum_id);
 		if(!empty($forum_id)){
 		$out = "";
 		$del = "";
@@ -964,7 +971,7 @@ class mingleforum {
           {
             if($this->options['forum_use_seo_friendly_urls'])
             {
-              if($user_ID && !$this->is_closed() && $this->have_access($this->current_forum, 'post') && $this->have_access($this->current_group, 'post'))
+              if(($user_ID || $this->allow_unreg()) && !$this->is_closed() && $this->have_access($this->current_forum, 'post') && $this->have_access($this->current_group, 'post'))
                  $o .= "<td nowrap='nowrap'><img src='$this->skin_url/images/buttons/quote.gif' alt='' align='left'><a href='$this->post_reply_link&quote=$post_id.$this->curr_page'> ".__("Quote", "mingleforum")."</a></td>";
               if($this->is_moderator($user_ID, $this->current_forum))
                  $o .= "<td nowrap='nowrap'><img src='$this->skin_url/images/buttons/delete.gif' alt='' align='left'><a onclick=\"return wpf_confirm();\" href='".$this->thread_link.$this->current_thread."&remove_post&id=$post_id'> ".__("Remove", "mingleforum")."</a></td>";
@@ -973,7 +980,7 @@ class mingleforum {
             }
             else
             {
-              if($user_ID && !$this->is_closed() && $this->have_access($this->current_forum, 'post') && $this->have_access($this->current_group, 'post'))
+              if(($user_ID || $this->allow_unreg()) && !$this->is_closed() && $this->have_access($this->current_forum, 'post') && $this->have_access($this->current_group, 'post'))
                  $o .= "<td nowrap='nowrap'><img src='$this->skin_url/images/buttons/quote.gif' alt='' align='left'><a href='$this->post_reply_link&quote=$post_id.$this->curr_page'> ".__("Quote", "mingleforum")."</a></td>";
               if($this->is_moderator($user_ID, $this->current_forum))
                  $o .= "<td nowrap='nowrap'><img src='$this->skin_url/images/buttons/delete.gif' alt='' align='left'><a onclick=\"return wpf_confirm();\" href='".$this->get_threadlink($this->current_thread)."&remove_post&id=$post_id'> ".__("Remove", "mingleforum")."</a></td>";
@@ -1114,10 +1121,10 @@ class mingleforum {
 						if($last_posterid != $user_ID){
 							$lp = strtotime($lpif); // date
 							$lv = strtotime($this->last_visit());
-							if($lv < $lp)
-								$image = "on.gif";
-							else
-								$image = "off.gif";
+						if($lv < $lp)
+							$image = "on.gif";
+						else
+							$image = "off.gif";
 						}
 					}
 					$this->o .= "
@@ -2045,10 +2052,10 @@ class mingleforum {
 		return "<span class='wpf-pages'>".$out."</span>";
 	}
 
-	function remove_topic(){
+	function remove_topic($forum_id){
 		global $user_ID, $wpdb;
 		$topic = $_GET['topic'];
-		if($this->is_moderator($user_ID, $this->current_forum)){
+		if($this->is_moderator($user_ID, $forum_id)){
 			$wpdb->query($wpdb->prepare("DELETE FROM {$this->t_posts} WHERE `parent_id` = %d", $topic));
 			$wpdb->query($wpdb->prepare("DELETE FROM {$this->t_threads} WHERE `id` = %d", $topic));
 		}else{
@@ -2094,12 +2101,12 @@ class mingleforum {
 		return $out;
 	}
 
-	function move_topic(){
+	function move_topic($forum_id){
 		global $user_ID, $wpdb;
 		$topic = $_GET['topic'];
 		$newForumID = !empty($_GET['newForumID']) ? (int)$_GET['newForumID'] : 0;
 		$newForumID = !empty($_POST['newForumID']) ? (int)$_POST['newForumID'] : $newForumID;
-		if($this->is_moderator($user_ID, $this->current_forum)){
+		if($this->is_moderator($user_ID, $forum_id)){
 			$strSQL = $wpdb->prepare("UPDATE {$this->t_threads} SET `parent_id` = {$newForumID} WHERE id = %d", $topic);
 			$wpdb->query($strSQL);
 			@header("location: ".$this->base_url."viewforum&f=".$newForumID);

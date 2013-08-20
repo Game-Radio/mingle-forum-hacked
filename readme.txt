@@ -121,7 +121,15 @@ Need help?:
 [Cartpauj Support Forums](http://cartpauj.icomnow.com/forum "Cartpauj Support Forums")
 
 == Frequently Asked Questions ==
-n/a
+* **My users can't register?** - Dashboard -> Settings -> General -> Anyone can register -> Save
+* **Help! I can't create new topics** - Make sure you have watched the setup videos and have created both categories AND forums.
+* **How can I hide the sidebar on the forum page?** - When editing the forum page, if your theme supports it, you should be able to change your Template to a full-width one. If you don't see this option, either hire a developer to make one for you, or bug your theme author to add it.
+* **I made customizations to the forum, but they get overwritten on every update** - If you customize anything inside of the /mingle-forum/ folder it will be overwritten, there's no way around that. If all you're changing is CSS, then put it somewhere else, like at the bottom of your theme's styles.css file (which gets overwritten when you upgrade your theme FYI).
+* **My skin looks bad/funny** - Your theme is most likely causing a conflict with the forum's table styles. We do our best, but can't possibly make the forum work for every conceivable WordPress theme. Find a friend who knows a thing or two about CSS and see if they'll help you get some custom styles set to fix the issue.
+* **Can I put different forums on different pages?** - No. Not right now, and maybe not ever.
+* **SEO friedly URL's are not working** - Make sure you have permalinks enabled in WordPress. Any setting but "default" should work. We personally like Day & Name for blogs, or Postname for non-blogs.
+* **Google isn't indexing my forum pages** - Step 1: Set WordPress Permalink settings to anything but default, then enable SEO Friendly URLs in the forum's options. Step 2: Make sure you don't have Canonical URLs enabled on the forum page by another plugin like All In One SEO Pack. Mingle Forum implements some of its own SEO features making this unneccessary.
+* **I can only see the front page of the forum. No matter what I click, it goes back to the front page** - Step 1: Make sure the forum isn't the home page of your site. Mingle Forum does not currently work when set to the home page. Step 2: Try enabling or disabling SEO Friendly URL's in the Forum Options. Step 3: Are you using WP SEO by Yoast? If so, disable the option to rewrite ugly permalinks.
 
 == Upgrade Notice ==
 
@@ -152,6 +160,10 @@ To make your theme compatible with this copy of Mingle Forum, in your style.css,
 * Fix display glitches
 * Fix -1 threads after delete the last post
 * Fix Quick Reply on IE
+* Fix SPAM time limit not working for guests
+* Fix quote link issue
+* Fix move/delete topics broken for moderators
+* Fix known conflict with WordPress SEO by Yoast
 = 1.0.34 =
 * Added ability to limit SPAM by setting a time interval users must wait between posts
 * Added option to allow users to post replies in locked categories

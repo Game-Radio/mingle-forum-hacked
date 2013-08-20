@@ -31,11 +31,16 @@ if(is_numeric($the_forum_id))
 //Spam time interval check
 if(!is_super_admin() && !$mingleforum->is_moderator($user_ID, $the_forum_id))
 {
-  $last_post_time = get_user_meta((int)$user_ID, 'mingle_forum_last_post_time_'.ip_to_string(), true);
+  //We're going to not set a user ID here, I know unconventional, but it's an easy way to account for guests.
+  $spam_meta_key = "mingle_forum_last_post_time_".ip_to_string();
+  $last_post_time = $wpdb->get_var($wpdb->prepare("SELECT `meta_value` FROM {$wpdb->usermeta} WHERE `meta_key` = %s", $spam_meta_key));
   if((time() - (int)$last_post_time) < stripslashes($mingleforum->options['forum_posting_time_limit']))
     wp_die(__('To help prevent spam, we require that you wait', 'mingleforum').' '.ceil(((int)(stripslashes($mingleforum->options['forum_posting_time_limit']))/60)).' '.__('minutes before posting again. Please use your browsers back button to return.', 'mingleforum'));
   else
-    update_user_meta((int)$user_ID, 'mingle_forum_last_post_time_'.ip_to_string(), time());
+    if($last_post_time !== null)
+      $wpdb->query($wpdb->prepare("UPDATE {$wpdb->usermeta} SET `meta_value` = %d WHERE `meta_key` = %s", time(), $spam_meta_key));
+    else
+      $wpdb->query($wpdb->prepare("INSERT INTO {$wpdb->usermeta} (`meta_key`, `meta_value`) VALUES (%s, %d)", $spam_meta_key, time()));
 }
 
 function ip_to_string()
@@ -155,12 +160,12 @@ function ip_to_string()
       $msg .= ("<div id='error'><p>".__("You must enter a subject", "mingleforum")."</p></div>");
       $error = true;
     }
-    else if($content == "") {
+    elseif($content == "") {
       $msg .=  "<h2>".__("An error occured", "mingleforum")."</h2>";
       $msg .=  ("<div id='error'><p>".__("You must enter a message", "mingleforum")."</p></div>");
       $error = true;
     }
-    else if(!$mingleforum->have_access($forum_id) || !$mingleforum->have_access($forum_id, 'post') || !$mingleforum->have_access($group_id) || !$mingleforum->have_access($group_id, 'post')) {
+    elseif(!$mingleforum->have_access($forum_id) || !$mingleforum->have_access($forum_id, 'post') || !$mingleforum->have_access($group_id) || !$mingleforum->have_access($group_id, 'post')) {
         $msg .=  "<h2>".__("An error occured", "mingleforum")."</h2>";
         $error = true;
     }
@@ -219,12 +224,12 @@ function ip_to_string()
       $msg .= ("<div id='error'><p>".__("You must enter a subject", "mingleforum")."</p></div>");
       $error = true;
     }
-    else if($content == ""){
+    elseif($content == ""){
       $msg .=  "<h2>".__("An error occured", "mingleforum")."</h2>";
       $msg .=  ("<div id='error'><p>".__("You must enter a message", "mingleforum")."</p></div>");
       $error = true;
     }
-    else if(!$mingleforum->have_access($forum_id) || !$mingleforum->have_access($forum_id, 'post') || !$mingleforum->have_access($group_id) || !$mingleforum->have_access($group_id, 'post')) {
+    elseif(!$mingleforum->have_access($forum_id) || !$mingleforum->have_access($forum_id, 'post') || !$mingleforum->have_access($group_id) || !$mingleforum->have_access($group_id, 'post')) {
         $msg .=  "<h2>".__("An error occured", "mingleforum")."</h2>";
         $error = true;
     }

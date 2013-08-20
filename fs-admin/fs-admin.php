@@ -229,7 +229,7 @@ $image = WPFURL."images/user.png";
         $image = WPFURL."images/logomain.png";
         echo "<div class='wrap'><h2><img src='$image' alt='' />".__("Mingle Forum >> Skin options", "mingleforum")."</h2><br class='clear' />
           <h3><a style='color:blue;' href='http://cartpauj.icomnow.com/forum/?mingleforumaction=viewforum&f=5.0'>".__("Get More Skins", "mingleforum")."</a></h3>
-			<table class='widefat'>
+          <table class='widefat'>
             <thead>
               <tr>
                 <th>".__("Screenshot", "mingleforum")."</th>
@@ -546,14 +546,17 @@ $image = WPFURL."images/user.png";
       </tr>";
 
        echo "<tr class='alternate'>
-        <td>".__("Closed Categories (Admin posting only):", "mingleforum")."<br/><small>".__("Comma separated list of Category ID's (Ex: 1, 2, 3)", "mingleforum")."</small></td>
-        <td><input type='text' name='forum_disabled_cats' value='".implode(",", $op['forum_disabled_cats'])."' /></td>
-		</tr><tr class='alternate'>
+        <td valign='top'>"
+          .__("Closed Categories (Admin posting only):", "mingleforum")."<br/><small>".__("Comma separated list of Category ID's (Ex: 1, 2, 3)", "mingleforum")."</small></td>
+          <td><input type='text' name='forum_disabled_cats' value='".implode(",", $op['forum_disabled_cats'])."' /></td>
+          </tr><tr class='alternate'>
         <td>".__("Users can reply in locked categories", "mingleforum")."</td>
-        <td><input type='checkbox' name='allow_user_replies_locked_cats' value='true'";
+        <td>
+          <input type='checkbox' name='allow_user_replies_locked_cats' value='true'";
           if($op['allow_user_replies_locked_cats'] == 'true')
             echo " checked='checked' ";
-            echo "/> ($defStr = ".__('Off', 'mingleforum').")</td>
+            echo "/> ($defStr = ".__('Off', 'mingleforum').")
+        </td>
       </tr>";
 
        echo "<tr class='alternate'>
