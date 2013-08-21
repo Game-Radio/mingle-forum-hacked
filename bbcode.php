@@ -71,6 +71,8 @@ if (!class_exists('cartpaujBBCodeParser'))
 
 		function bbc2html($subject)
 		{
+			wp_enqueue_script('mingle-forum', plugins_url('js/script.js', __FILE__), array('jquery'));
+
 			$codes = array(array(), array());
 			preg_match_all('/\[code\](.+)\[\/code\]/Uis', $subject, $codes);
 

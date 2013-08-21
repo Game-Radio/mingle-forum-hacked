@@ -116,8 +116,8 @@ function uncheckglobal(headerfield, checkform){
 	checkform.mod_global.checked = false;
 }
 
-jQuery().ready(function () {
-	jQuery('.mingle-spoiler-view li:first-child').click(function () {
+jQuery(function() {
+	jQuery('.mingle-spoiler-view li:first-child').live('click', function() {
 		var text = jQuery(this).parent().find('li:last-child');
 		if (text.is(':hidden')) {
 			text.slideDown('200');
