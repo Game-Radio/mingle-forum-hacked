@@ -7,8 +7,8 @@ define('WPFPLUGIN', "mingle-forum");
 define('WPFDIR', dirname(plugin_basename(__FILE__)));
 define('WPFPATH', WP_CONTENT_DIR . '/plugins/' . WPFDIR . '/');
 define('WPFURL', WP_CONTENT_URL . '/plugins/' . WPFDIR . '/');
-define('SKINDIR', WPFPATH . '/skins/');
-define('SKINURL', WPFURL . '/skins/');
+define('SKINDIR', WPFPATH . 'skins/');
+define('SKINURL', WPFURL . 'skins/');
 define('NO_SKIN_SCREENSHOT_URL', WP_CONTENT_URL . '/plugins/' . WPFDIR . '/skins/default.png');
 
 define("ADMIN_PROFILE_URL", get_bloginfo("url")."/wp-admin/user-edit.php?user_id=");

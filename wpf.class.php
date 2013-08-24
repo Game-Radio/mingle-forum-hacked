@@ -894,7 +894,6 @@ class mingleforum{
 							$out .= "<div class='wpf-small'>";
 							$out .= $this->get_userrole($post->author_id)."<br />";
 							$out .= __("Posts:", "mingleforum")." ".$this->get_userposts_num($post->author_id)."<br />";
-							$out .= '<a href="#postid-'.$post->id.'">Permalink</a><br />';
 							if($this->opt["forum_use_gravatar"])
 								$out .= $this->get_avatar($post->author_id);
 							$out .= "</div>".apply_filters('mf_below_post_avatar', '', $post->author_id, $post->id)."</td>
@@ -963,7 +962,7 @@ class mingleforum{
 
 	function get_postmeta($post_id, $author_id){
 		global $user_ID;
-		$image = "<img align='left' src='$this->skin_url/images/post/xx.gif' alt='".__("Post", "mingleforum")."' style='padding-right:10px;'/>";
+		$image = "<a href='#postid-$post_id'><img align='left' src='$this->skin_url/images/post/xx.gif' alt='".__("Post", "mingleforum")."' style='padding-right:10px;'/></a>";
 		$o = "<table width='100%' cellspacing='0' cellpadding='0' style='margin:0; padding:0; border-collapse:collapse;' border='0'>
 				<tr>
 					<td colspan='3'>$image <strong>".$this->get_postname($post_id)."</strong><br /><small><strong>".__("on:", "mingleforum")."&nbsp;</strong>".$this->get_postdate($post_id)."</small></td>";
