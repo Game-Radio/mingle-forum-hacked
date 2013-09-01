@@ -2118,7 +2118,7 @@ class mingleforum{
 	function remove_post(){
 		global $user_ID, $wpdb;
 		$id = (isset($_GET['id']) && is_numeric($_GET['id']))?$_GET['id']:0;
-		$author = $wpdb->get_row($wpdb->prepare("SELECT author_id, parent_id from {$this->t_posts} where id = %d"), $id);
+		$author = $wpdb->get_row("SELECT author_id, parent_id FROM {$this->t_posts} WHERE id = " . $id);
 
 		$del = "fail";
 		if(current_user_can("administrator") || is_super_admin($user_ID))
