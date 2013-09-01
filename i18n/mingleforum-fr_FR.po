@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Mingle Forum\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-24 15:04+0100\n"
-"PO-Revision-Date: 2013-08-24 15:04+0100\n"
+"POT-Creation-Date: 2013-09-01 17:11+0100\n"
+"PO-Revision-Date: 2013-09-01 17:11+0100\n"
 "Last-Translator: Xefir Destiny <xefir@crystalyx.net>\n"
 "Language-Team: Gobiel <gobiel@gobiel.info>\n"
 "Language: fr_FR\n"
@@ -613,7 +613,7 @@ msgstr "Nouvelles discussions depuis votre dernière visite"
 msgid "Summary"
 msgstr "Sommaire"
 
-#: wpf.class.php:2417 wpf.class.php:2625 wpf.class.php:2647 wpf.class.php:2669
+#: wpf.class.php:2417 wpf.class.php:2629 wpf.class.php:2654 wpf.class.php:2675
 #: fs-admin/wpf-add-forum.php:14 fs-admin/wpf-edit-forum-group.php:38
 #: fs-admin/wpf-usergroup-edit.php:32
 msgid "Name:"
@@ -683,47 +683,47 @@ msgstr "Code de sécurité:"
 msgid "Enter Security Code: (required)"
 msgstr "Code de sécurité:"
 
-#: wpf.class.php:2623 wpf.class.php:2645
+#: wpf.class.php:2627 wpf.class.php:2652
 msgid "Forum post - "
-msgstr "Discussions"
+msgstr "Discussions - "
 
-#: wpf.class.php:2624 wpf.class.php:2646 wpf.class.php:2668
+#: wpf.class.php:2628 wpf.class.php:2653 wpf.class.php:2674
 msgid "DETAILS:"
 msgstr "DÉTAILS:"
 
-#: wpf.class.php:2626 wpf.class.php:2648 wpf.class.php:2670
-msgid "Email:"
-msgstr "Email"
-
-#: wpf.class.php:2627 wpf.class.php:2649 wpf.class.php:2671
+#: wpf.class.php:2630 wpf.class.php:2655 wpf.class.php:2677
 msgid "Date:"
 msgstr "Date"
 
-#: wpf.class.php:2628 wpf.class.php:2650 wpf.class.php:2672
+#: wpf.class.php:2631 wpf.class.php:2656 wpf.class.php:2678
 msgid "Reply Content:"
 msgstr "Réponse:"
 
-#: wpf.class.php:2629 wpf.class.php:2651 wpf.class.php:2673
+#: wpf.class.php:2632 wpf.class.php:2657 wpf.class.php:2679
 msgid "View Post Here:"
 msgstr "Voir discussion:"
 
-#: wpf.class.php:2667
+#: wpf.class.php:2673
 msgid "New Forum content - "
 msgstr "Nouveau contenu sur le forum - "
 
-#: wpf.class.php:2867
+#: wpf.class.php:2676
+msgid "Email:"
+msgstr "Email"
+
+#: wpf.class.php:2873
 msgid "Mingle Forum Post Options"
 msgstr "Mingle Forum >> Options de Skins"
 
-#: wpf.class.php:2873
+#: wpf.class.php:2879
 msgid "Add this post to"
 msgstr "Supprimer ce message?"
 
-#: wpf.class.php:2877
+#: wpf.class.php:2883
 msgid "Do not check this if this post has already been linked to the forum!"
 msgstr "Ne cochez pas cette option si ce post a déjà été lié sur le forum !"
 
-#: wpf.class.php:2909
+#: wpf.class.php:2915
 msgid "Join the Forum discussion on this post"
 msgstr "Rejoignez le forum de discussion sur ce post"
 

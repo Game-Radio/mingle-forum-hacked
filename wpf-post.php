@@ -20,9 +20,9 @@ if($_GET['mingleforumaction'] == "postreply"){
 				<th colspan='2'>".__("Post Reply", "mingleforum")."</th>
 			</tr>
 			<tr>
-				<td>".__("Subject:", "mingleforum")."</td>
-				<td><input size='50%' type='text' name='add_post_subject' class='wpf-input' value='".__('Re:', 'mingleforum')." ".$this->get_subject($thread)."'/></td>
-			</tr>
+				<td>".__("Subject:", "mingleforum")."</td>";
+	$out .=	'<td><input size="50%" type="text" name="add_post_subject" class="wpf-input" value="'.__('Re:', 'mingleforum').' '.$this->get_subject($thread).'"/></td>';
+	$out .=	"</tr>
 			<tr>
 				<td valign='top'>".__("Message:", "mingleforum")."</td>
 				<td>";
@@ -73,9 +73,9 @@ if($_GET['mingleforumaction'] == "editpost"){
 					<th colspan='2'>".__("Edit Post", "mingleforum")."</th>
 				</tr>
 				<tr>
-					<td>".__("Subject:", "mingleforum")."</td>
-					<td><input size='50%' type='text' name='edit_post_subject' class='wpf-input' value='".stripslashes($post->subject)."'/></td>
-				</tr>
+					<td>".__("Subject:", "mingleforum")."</td>";
+		$out .=	'<td><input size="50%" type="text" name="edit_post_subject" class="wpf-input" value="'.stripslashes($post->subject).'"/></td>';
+		$out .=	"</tr>
 				<tr>
 					<td valign='top'>".__("Message:", "mingleforum")."</td>
 					<td>";

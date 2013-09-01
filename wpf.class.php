@@ -2620,10 +2620,13 @@ class mingleforum{
 		$submitter_email = (!$user_ID)?"guest@nosite.com":$this->get_userdata($user_ID, 'user_email');
 		$sender = get_bloginfo("name");
 		$to = get_option("mf_thread_subscribers_".$thread_id, array());
+		$posMailer = array_search($submitter_email, $to);
+		if ($posMailer !== false)
+			unset($to[$posMailer]);
+
 		$subject =	__("Forum post - ", "mingleforum").$subject;
 		$message =	__("DETAILS:", "mingleforum")."<br/><br/>".
 					__("Name:", "mingleforum")." ".$submitter_name."<br/>".
-					__("Email:", "mingleforum")." ".$submitter_email."<br/>".
 					__("Date:", "mingleforum")." ".$this->format_date($date)."<br/>".
 					__("Reply Content:", "mingleforum")."<br/>".$content."<br/><br/>".
 					__("View Post Here:", "mingleforum")." ".$this->get_threadlink($thread_id);
@@ -2642,10 +2645,13 @@ class mingleforum{
 		$submitter_email = (!$user_ID)?"guest@nosite.com":$this->get_userdata($user_ID, 'user_email');
 		$sender = get_bloginfo("name");
 		$to = get_option("mf_forum_subscribers_".$forum_id, array());
+		$posMailer = array_search($submitter_email, $to);
+		if ($posMailer !== false)
+			unset($to[$posMailer]);
+
 		$subject =	__("Forum post - ", "mingleforum").$subject;
 		$message =	__("DETAILS:", "mingleforum")."<br/><br/>".
 					__("Name:", "mingleforum")." ".$submitter_name."<br/>".
-					__("Email:", "mingleforum")." ".$submitter_email."<br/>".
 					__("Date:", "mingleforum")." ".$this->format_date($date)."<br/>".
 					__("Reply Content:", "mingleforum")."<br/>".$content."<br/><br/>".
 					__("View Post Here:", "mingleforum")." ".$this->get_threadlink($thread_id);

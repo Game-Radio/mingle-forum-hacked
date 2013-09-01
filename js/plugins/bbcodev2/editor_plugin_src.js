@@ -144,6 +144,8 @@
 			rep(/<\/(em|i)>/gi,"[/i]");
 			rep(/<(em|i)>/gi,"[i]");
 			rep(/<\/u>/gi,"[/u]");
+			rep(/<\/del>/gi,"[/s]");
+			rep(/<del>/gi,"[s]");
 			rep(/<div class=\"youtube\" title=\"(.*?)\">.*?<\/div>/gi,"[video=youtube]$1[/video]");
 			rep(/<div class=\"dailymotion\" title=\"(.*?)\">.*?<\/div>/gi,"[video=dailymotion]$1[/video]");
 			rep(/<div class=\"veoh\" title=\"(.*?)\">.*?<\/div>/gi,"[video=veoh]$1[/video]");
@@ -231,6 +233,8 @@
 			rep(/\[\/i\]/gi,"</em>");
 			rep(/\[u\]/gi,"<u>");
 			rep(/\[\/u\]/gi,"</u>");
+			rep(/\[s\]/gi,"<del>");
+			rep(/\[\/s\]/gi,"</del>");
 			rep(/\[url=([^\]]+)\](.*?)\[\/url\]/gi,"<a href=\"$1\">$2</a>");
 			rep(/\[url\](.*?)\[\/url\]/gi,"<a href=\"$1\">$1</a>");
 			rep(/\[link=([^\]]+)\](.*?)\[\/link\]/gi,"<a target=\"_blank\" href=\"$1\">$2</a>");
