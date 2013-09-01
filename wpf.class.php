@@ -2118,7 +2118,7 @@ class mingleforum{
 	function remove_post(){
 		global $user_ID, $wpdb;
 		$id = (isset($_GET['id']) && is_numeric($_GET['id']))?$_GET['id']:0;
-		$author = $wpdb->get_var($wpdb->prepare("SELECT author_id, parent_id from {$this->t_posts} where id = %d"), $id);
+		$author = $wpdb->get_row($wpdb->prepare("SELECT author_id, parent_id from {$this->t_posts} where id = %d"), $id);
 
 		$del = "fail";
 		if(current_user_can("administrator") || is_super_admin($user_ID))
@@ -2130,9 +2130,9 @@ class mingleforum{
 
 		if($del == "ok"){
 			$wpdb->query($wpdb->prepare("DELETE FROM {$this->t_posts} WHERE id = %d", $id));
-			$nbmsg = $wpdb->get_var("SELECT COUNT(*) FROM {$this->t_posts} WHERE parent_id = {$author->parent_id}");
+			$nbmsg = $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM {$this->t_posts} WHERE parent_id = %d", $author->parent_id));
 			if (!$nbmsg)
-				$wpdb->query("DELETE FROM {$this->t_threads} WHERE id = {$author->parent_id}");
+				$wpdb->query($wpdb->prepare("DELETE FROM {$this->t_threads} WHERE id = %d", $author->parent_id));
 			$this->o .= "<div class='updated'>".__("Post deleted", "mingleforum")."</div>";
 		}else{
 			wp_die(__("An unknown error has occured. Please try again.", "mingleforum"));
