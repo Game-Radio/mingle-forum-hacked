@@ -40,7 +40,6 @@ You can try Mingle Forum out on my site:
 * Forum Sitemap (../wp-content/plugins/mingle-forum/sitemap.php)
 * Integrated HTML areas for adsense or affiliate links
 * Media embedding into forum posts (like Youtube, Flickr, Photobucket...)
-* Private Messages - Mingle Forum now integrates seamlessly with Mingle or my [Cartpauj PM Plugin](http://cartpauj.com/projects/cartpauj-pm-plugin) (Requires Cartpauj PM vs 1.0.09 or greater)
 * RSS Feeds
 * Quick Reply
 * Wordpress 3.x ready!
@@ -63,7 +62,6 @@ You can try Mingle Forum out on my site:
 * Integrates nicely with most themes (Its tough to make it work for all themes so some skin modifications may be required for your site)
 * Allow/Dis-allow other users to view your profile from the Forum
 * Supports internationalization/localization
-* Integrates with the Mingle plugin (by Blair Williams) NOTE: The Mingle plugin is NOT required for the forum to work
 
 = Notes =
 * Mingle forum 1.0.32 uses a new email subscription system. All old subscriptions will be lost after upgrading. This will allow much better email support for the future.
